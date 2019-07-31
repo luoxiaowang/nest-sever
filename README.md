@@ -1,4 +1,4 @@
-# Koa 2 Restful [![Circle CI](https://circleci.com/gh/jsnomad/koa-restful-boilerplate.svg?style=svg)](https://circleci.com/gh/jsnomad/koa-restful-boilerplate)
+# Koa 2 Restful
 
 ## Description
 Koa 2 RESTful API using :
@@ -8,7 +8,7 @@ Koa 2 RESTful API using :
  - Babel
  - Asynchronous Functions (Async/Await)
  - restc
- 
+
 ## Running
 Install dependencies
 ```
