@@ -9,6 +9,8 @@ const demandSchema = new Schema({
   testR: String, // 测试主R
   planDate: String, // 计划提测日期
   actualDate: String, // 实际提测日期
+  planOnlineDate: String, // 计划上线日期
+  actualOnlineDate: String, // 实际上线日期
   developPd: Number, // 开发估时
   testPd: Number, // 测试估时
   testPw: Number, // 测试人效
