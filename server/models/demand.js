@@ -4,6 +4,7 @@ const Schema = mongoose.Schema
 
 const demandSchema = new Schema({
   name: String, // 需求名称
+  link: String, // 需求链接
   demandR: String, // 需求主R
   developR: String, // 开发主R
   testR: String, // 测试主R
