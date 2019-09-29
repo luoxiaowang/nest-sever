@@ -29,7 +29,7 @@ router.get('/', async(ctx) => {
   const fault = await Fault.find({
     $and : filter
   })
-  .sort({occurDate: 1})
+  .sort({occurDate: -1})
   .skip((Number(currentPage) - 1) * Number(pageSize))
   .limit(Number(pageSize))
 

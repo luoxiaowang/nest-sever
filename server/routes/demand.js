@@ -31,7 +31,7 @@ router.get('/', async(ctx) => {
   const demand = await Demand.find({
     $and : filter
   })
-  .sort({actualDate: 1})
+  .sort({actualDate: -1})
   .skip((Number(currentPage) - 1) * Number(pageSize))
   .limit(Number(pageSize))
 

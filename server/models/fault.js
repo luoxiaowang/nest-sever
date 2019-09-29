@@ -5,6 +5,7 @@ const Schema = mongoose.Schema
 const faultSchema = new Schema({
   sysName: String, // 故障系统
   title: String, // 故障标题
+  link: String, // 故障链接
   desc: String, // 故障描述
   occurDate: String, // 问题发生时间
   resolveDate: String, // 问题解决时间
