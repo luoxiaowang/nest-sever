@@ -14,7 +14,8 @@ const demandSchema = new Schema({
   actualOnlineDate: String, // 实际上线日期
   developPd: Number, // 开发估时
   testPd: Number, // 测试估时
-  testPw: Number, // 测试人效
+  subDemand: Number, // 子需求数
+  remark: String, // 备注
 })
 
 export default mongoose.model('Demand', demandSchema)  // 这里Demand代表的是名为demands的mongodb collection名称
