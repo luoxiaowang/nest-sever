@@ -35,17 +35,41 @@ router.get('/', async(ctx) => {
 
 // POST /api/schedule/create
 router.post('/create', async(ctx) => {
+  const { planR, planDate } = ctx.request.body
   try {
-    const schedule = await new Schedule(ctx.request.body).save()
-    ctx.body = {
-      code: 200,
-      data: schedule,
-      msg: 'success'
+    const scheduleResult = await queryScheduleByName(planR, planDate)
+    if (scheduleResult && scheduleResult.length > 0) {
+      ctx.body = {
+        code: 500,
+        data: scheduleResult,
+        msg: ''
+      }
+    } else {
+      const schedule = await new Schedule(ctx.request.body).save()
+      ctx.body = {
+        code: 200,
+        data: schedule,
+        msg: 'success'
+      }
     }
   } catch (err) {
     ctx.throw(500)
   }
 })
+
+async function queryScheduleByName(planR, planDate) {
+  const planRReg = new RegExp(planR, 'i')
+
+  const filter = [
+    {planR: { $regex: planRReg }},
+    {planDate: planDate}
+  ]
+  const schedule = await Schedule.find({
+    $and : filter
+  })
+  // console.log(schedule)
+  return schedule
+}
 
 /* eslint-enable no-unused-vars, no-param-reassign, new-cap */
 
