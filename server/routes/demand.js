@@ -24,14 +24,14 @@ router.get('/', async(ctx) => {
   ]
 
   if (startDate) {
-    filter.push({actualDate: { $gte: startDate }})
-    filter.push({actualDate: { $lte: endDate }})
+    filter.push({actualOnlineDate: { $gte: startDate }})
+    filter.push({actualOnlineDate: { $lte: endDate }})
   }
 
   const demand = await Demand.find({
     $and : filter
   })
-  .sort({actualDate: -1})
+  .sort({actualOnlineDate: -1})
   .skip((Number(currentPage) - 1) * Number(pageSize))
   .limit(Number(pageSize))
 

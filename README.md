@@ -1,36 +1,23 @@
-# Koa 2 Restful
+项目启动步骤：
+1、git pull拉取各个代码
+2、client：
+    2.1  npm run build
+    2.2  pm2 delete server
+    2.3  pm2 start server.js
+3、sever：
+    3.1  npm run build
+    3.2  pm2 delete dist
+    3.3  pm2 start dist/
 
-## Description
-Koa 2 RESTful API using :
+4、启动mongod
+    mongod --config /etc/mongod.conf --noIndexBuildRetry
+    mongod -shutdown -dbpath=/data/db
 
- - Koa 2
- - Mongodb + Mongoose
- - Babel
- - Asynchronous Functions (Async/Await)
- - restc
+5、命令行永久有效mongod
+    echo $PATH
+    vim ~/.bashrc
+    export PATH=/usr/local/mongodb/bin:$PATH
+    source ~/.bashrc
 
-## Running
-Install dependencies
-```
-npm install
-```
 
-Start a Local Server
-```
-npm start
-```
-
-Run Test
-```
-npm test
-```
-
-Building and Running Production Server
-```
-npm run prod
-```
-
-**Note : Please make sure your MongoDB is running before using ```npm start``` or ```npm run prod```**
-
-## License
-MIT &copy; [NCZkevin](https://github.com/nczkevin)
+项目地址：http://176.122.171.171/#/demand
