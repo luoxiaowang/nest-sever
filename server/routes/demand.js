@@ -28,12 +28,21 @@ router.get('/', async(ctx) => {
     filter.push({actualOnlineDate: { $lte: endDate }})
   }
 
-  const demand = await Demand.find({
-    $and : filter
-  })
-  .sort({actualOnlineDate: -1})
-  .skip((Number(currentPage) - 1) * Number(pageSize))
-  .limit(Number(pageSize))
+  let demand = []
+
+  if (pageSize) {
+    demand = await Demand.find({
+      $and : filter
+    })
+    .sort({actualOnlineDate: -1})
+    .skip((Number(currentPage) - 1) * Number(pageSize))
+    .limit(Number(pageSize))
+  } else {
+    demand = await Demand.find({
+      $and : filter
+    })
+    .sort({actualOnlineDate: -1})
+  }
 
   const total = await Demand.count({
     $and : filter
