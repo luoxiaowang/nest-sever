@@ -1,4 +1,5 @@
 import 'babel-polyfill'
+import _ from 'lodash'
 import Demand from '../models/demand'
 import Router from 'koa-router'
 import { baseApi } from '../config'
@@ -56,6 +57,61 @@ router.get('/', async(ctx) => {
   }
 })
 
+// GET  /api/demand/summary/
+router.get('/summary', async(ctx) => {
+  const { testR, startDate, endDate } = ctx.query
+  const testRReg = new RegExp(testR, 'i')
+
+  const filter = [
+    {testR: { $regex: testRReg }}
+  ]
+
+  if (startDate) {
+    filter.push({actualOnlineDate: { $gte: startDate }})
+    filter.push({actualOnlineDate: { $lte: endDate }})
+  }
+
+  const demand = await Demand.find({
+    $and : filter
+  })
+  .sort({actualOnlineDate: -1})
+
+  let result = []
+  const obj = _.groupBy(demand, 'testR')
+  if (Object.keys(obj) && Object.keys(obj).length > 0) {
+    Object.keys(obj).forEach(item => {
+      const list = obj[item] || []
+      const versionCount = list.length
+      const testR = item
+      let bugCount = 0
+      let developPd = 0
+      let testPd = 0
+      let caseCount = 0
+      list.forEach(o => {
+        bugCount += (o.bugCount || 0)
+        developPd += (o.developPd || 0)
+        testPd += (o.testPd || 0)
+        caseCount += (o.caseCount || 0)
+      })
+      result.push({
+        testR,
+        versionCount,
+        bugCount,
+        developPd: developPd.toFixed(1),
+        testPd: testPd.toFixed(1),
+        caseCount,
+      })
+    })
+  }
+
+
+  ctx.body = {
+    code: 200,
+    data: result,
+    msg: 'success'
+  }
+})
+
 // POST /api/demand/create
 router.post('/create', async(ctx) => {
   try {
@@ -70,7 +126,7 @@ router.post('/create', async(ctx) => {
   }
 })
 
-// GET /api/demand/create
+// GET /api/demand/delete
 router.get('/delete', async(ctx) => {
   try {
     const demand = await Demand.findByIdAndRemove(ctx.query.id)
