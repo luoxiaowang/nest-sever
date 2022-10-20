@@ -46,7 +46,7 @@
     "koa-logger": "^2.0.0",
     "koa-router": "^7.0.0",
     "mocha": "^2.4.5",
-    "mongoose": "^4.4.3",
+    "mongoose": "^4.13.21",
     "nodemon": "^1.8.1",
     "restc": "0.0.3",
     "should": "^8.2.2",
