@@ -42,7 +42,7 @@
     "eslint": "^1.10.3",
     "eslint-config-airbnb": "^5.0.1",
     "koa": "^2.0.0-alpha.3",
-    "koa-bodyparser": "^3.0.0",
+    "koa-bodyparser": "^4.3.0",
     "koa-logger": "^2.0.0",
     "koa-router": "^7.0.0",
     "mocha": "^2.4.5",
@@ -50,7 +50,7 @@
     "nodemon": "^1.8.1",
     "restc": "0.0.3",
     "should": "^8.2.2",
-    "supertest": "^1.2.0"
+    "supertest": "^6.3.2"
   },
   "dependencies": {
     "koa2-cors": "^2.0.6"
